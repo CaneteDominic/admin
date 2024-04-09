@@ -16,9 +16,14 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="login-container">
-      <h1>SmartPosture</h1>
-      <i><h2>Posture Corrector</h2></i>
-
+      <div className='content'>
+      <strong><h1>SmartPosture</h1></strong>
+          <div className='description'>
+            <p>Posture Corrector</p>
+            </div>
+        <div className='essay'>
+          <p>hi earl</p>
+        </div>
       <div>
         <input 
           className="login-input"
@@ -39,6 +44,7 @@ const Login = ({ onLogin }) => {
       </div>
       <button className="login-btn" onClick={handleLogin}>Login</button>
       {error && <div>{error}</div>}
+      </div>
     </div>
   );
 };
