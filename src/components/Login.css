@@ -1,0 +1,46 @@
+/* Login.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../Assets/flipped.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .login-container {
+    width: 300px; /* Maintain the width */
+    height: 800px; /* Maintain the height */
+    max-width: 400px; /* Maintain the maximum width */
+    margin: 0 auto; /* Center horizontally */
+    background-color: #ffffff; /* Change background color */
+    position: absolute; /* Position absolutely */
+    top: 50%; /* Place at 50% from top */
+    transform: translateY(-50%); /* Adjust to vertically center */
+    right: 0; /* Align to the right */
+  }
+  
+  /* Your existing styles for login input, button, etc. */
+  .login-input {
+    width: 80%; /* Adjust width to fit container */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .login-btn {
+    width: 100%; /* Adjust width to fit container */
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #EBC802;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  .login-btn:hover {
+    background-color: #ffd700;
+  }
+  
