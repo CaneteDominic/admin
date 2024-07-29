@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import AdminDashboard from './components/AdminDashboard';
 
@@ -10,14 +10,27 @@ const App = () => {
     setLoggedIn(true);
   };
 
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
+
   return (
-    <div>
-      {loggedIn ? (
-        <AdminDashboard />
-      ) : (
-        <Login onLogin={handleLogin} />
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/login"
+          element={<Login onLogin={handleLogin} />}
+        />
+        <Route
+          path="/admin-dashboard"
+          element={loggedIn ? <AdminDashboard onLogout={handleLogout} /> : <Login onLogin={handleLogin} />}
+        />
+        <Route
+          path="*"
+          element={loggedIn ? <AdminDashboard onLogout={handleLogout} /> : <Login onLogin={handleLogin} />}
+        />
+      </Routes>
+    </Router>
   );
 };
 

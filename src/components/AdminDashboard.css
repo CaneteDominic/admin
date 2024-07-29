@@ -1,0 +1,66 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  min-height: 100vh;
+  border-right: 1px solid #ddd;
+}
+
+.profile img {
+  width: 100px;
+  height: 100px;
+}
+
+.profile h3,
+.profile p {
+  margin: 0;
+}
+
+.nav-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.header {
+  border-bottom: 1px solid #ddd;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.welcome-section {
+  background: #f8f9fa;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.stats-cards .card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.social-cards .card {
+  color: #fff;
+}
+
+.facebook {
+  background-color: #3b5998;
+}
+
+.twitter {
+  background-color: #55acee;
+}
+
+.linkedin {
+  background-color: #007bb5;
+}
+
+.googleplus {
+  background-color: #dd4b39;
+}
+
+.chart-section {
+  text-align: center;
+}

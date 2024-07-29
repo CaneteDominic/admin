@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../firebase';
 import './Login.css';
 
 const Login = ({ onLogin }) => {
@@ -7,43 +9,41 @@ const Login = ({ onLogin }) => {
   const [error, setError] = useState('');
 
   const handleLogin = () => {
-    if (username === 'admin' && password === 'admin123') {
-      onLogin();
-    } else {
-      setError('Invalid username or password');
-    }
+    signInWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        onLogin(); // Successful login
+      })
+      .catch((error) => {
+        setError('Invalid username or password');
+      });
   };
 
   return (
     <div className="login-container">
       <div className='content'>
-      <strong><h1>SmartPosture</h1></strong>
-          <div className='description'>
-            <p>Posture Corrector</p>
-            </div>
-        <div className='essay'>
-          <p>hi earl</p>
+        <h1 className="title">Smart<span>Posture</span></h1>
+        <p className="subtitle">POSTURE CORRECTOR</p>
+        <p className="description">Smart Gym Posture Correcttor App.</p>
+        <div className="input-container">
+          <input 
+            className="login-input"
+            type="text" 
+            placeholder="Username" 
+            value={username} 
+            onChange={(e) => setUsername(e.target.value)} 
+          />
         </div>
-      <div>
-        <input 
-          className="login-input"
-          type="text" 
-          placeholder="Username" 
-          value={username} 
-          onChange={(e) => setUsername(e.target.value)} 
-        />
-      </div>
-      <div>
-        <input 
-          className="login-input"
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-        />
-      </div>
-      <button className="login-btn" onClick={handleLogin}>Login</button>
-      {error && <div>{error}</div>}
+        <div className="input-container">
+          <input 
+            className="login-input"
+            type="password" 
+            placeholder="Password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+          />
+        </div>
+        <button className="login-btn" onClick={handleLogin}>LOG IN</button>
+        {error && <div className="error">{error}</div>}
       </div>
     </div>
   );
