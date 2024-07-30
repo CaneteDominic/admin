@@ -33,6 +33,7 @@ export const getUserInfoAndStats = async () => {
         birthdate: userInfo.birthdate,
         totalPushUps: pushUpCount,
         totalSquats: squatCount,
+        stats: userStatsData
       });
   });
 
