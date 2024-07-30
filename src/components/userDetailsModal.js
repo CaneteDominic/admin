@@ -69,19 +69,34 @@ function UserDetailsModal({ user, onClose }) {
       <div className="modal-content">
         <span className="close" onClick={onClose}>&times;</span>
         <h2>User Details</h2>
-        <p><strong>Username:</strong> {user.username}</p>
-        <p><strong>User ID:</strong> {user.userId}</p>
-        <p><strong>Birthdate:</strong> {user.birthdate}</p>
-        <p><strong>Total Push-Ups:</strong> {user.totalPushUps}</p>
-        <p><strong>Total Squats:</strong> {user.totalSquats}</p>
-        <div style={{ marginBottom: '20px' }}>
-          <h3>Push-Ups Over Time</h3>
-          <Line data={pushUpData} options={options} />
+        <div className="user-details">
+            <div className="detail-item">
+                <div><strong>Username</strong></div> 
+                <div>{user.username}</div>
+            </div>
+            <div className="detail-item">
+                <div><strong>User ID</strong></div> 
+                <div>{user.userId}</div>
+            </div>
+            <div className="detail-item">
+                <div><strong>Total Push-Ups</strong></div> 
+                <div>{user.totalPushUps}</div>
+            </div>
+            <div className="detail-item">
+                <div><strong>Total Squats</strong></div> 
+                <div>{user.totalSquats}</div>
+            </div>
         </div>
+        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}> 
+            <div style={{ marginBottom: '20px', width: '350px', height: '400px' }}>
+                <h4>Push-Ups Over Time</h4>
+                <Line data={pushUpData} options={options} />
+            </div>
 
-        <div>
-          <h3>Squats Over Time</h3>
-          <Line data={squatData} options={options} />
+            <div style={{width: '350px', height: '400px'}}>
+                <h4>Squats Over Time</h4>
+                <Line data={squatData} options={options} />
+            </div>
         </div>
         </div>
       </div>
