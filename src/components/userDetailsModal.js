@@ -1,10 +1,8 @@
-// src/UserDetailsModal.js
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, Title, Tooltip, Legend, PointElement } from 'chart.js';
 import './userDetailsModal.css';
 
-// Register chart components
 ChartJS.register(
   LineElement,
   CategoryScale,
@@ -76,20 +74,18 @@ function UserDetailsModal({ user, onClose }) {
         <p><strong>Birthdate:</strong> {user.birthdate}</p>
         <p><strong>Total Push-Ups:</strong> {user.totalPushUps}</p>
         <p><strong>Total Squats:</strong> {user.totalSquats}</p>
-
-        {/* Line Chart for Push-Ups */}
         <div style={{ marginBottom: '20px' }}>
           <h3>Push-Ups Over Time</h3>
           <Line data={pushUpData} options={options} />
         </div>
 
-        {/* Line Chart for Squats */}
         <div>
           <h3>Squats Over Time</h3>
           <Line data={squatData} options={options} />
         </div>
+        </div>
       </div>
-    </div>
+    
   );
 }
 

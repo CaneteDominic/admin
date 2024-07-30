@@ -4,6 +4,7 @@ import {getUserInfoAndStats} from '../api/api';
 import UserDetailsModal from './userDetailsModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AdminDashboard.css';
+import Summary from './Summary';
 
 const AdminDashboard = ({ onLogout }) => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const AdminDashboard = ({ onLogout }) => {
   const handleCloseModal = () => {
     setSelectedUser(null);
   };
-  
+
   return (
     <div className="admin-dashboard">
       <aside className="sidebar">
@@ -54,6 +55,7 @@ const AdminDashboard = ({ onLogout }) => {
           </div>
         </header>
         <div className="clients-section">
+          <Summary />
           <div className="clients-header">
             <h1>Clients</h1>
           </div>
