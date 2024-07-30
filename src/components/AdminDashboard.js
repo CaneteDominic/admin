@@ -13,117 +13,56 @@ const AdminDashboard = ({ onLogout }) => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <nav id="sidebar" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-          <div className="position-sticky">
-            <div className="profile text-center py-4">
-              <img src="profile-picture-url" alt="Profile" className="img-fluid rounded-circle" />
-              <h3>ADMIN</h3>
-              <p>Online</p>
-            </div>
-            <ul className="nav flex-column">
-              <li className="nav-item">
-                <button className="nav-link btn btn-link">USER DATA</button>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link btn btn-link">USER INFORMATION</button>
-              </li>
-            </ul>
-          </div>
-        </nav>
+    <div className="admin-dashboard">
+      <aside className="sidebar">
+        <div className="sidebar-menu">
+          <div className="menu-item">Dashboard</div>
+          <div className="menu-item">Advisors</div>
+          <div className="menu-item">Clients</div>
+        </div>
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
+      </aside>
 
-        <main className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-          <header className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-3">
-            <div className="logo d-flex align-items-center">
-              <img src="logo-url" alt="Logo" className="img-fluid" />
-              <h1 className="h2 ml-3">SmartPosture</h1>
-            </div>
-            <div className="user-actions">
-              <button className="btn btn-outline-secondary" onClick={handleLogout}>LOGOUT</button>
-            </div>
-          </header>
-
-          <div className="welcome-section py-4">
-            <h1>Dashboard</h1>
+      <main className="main-content">
+        <header className="header">
+          <div className="user-info">
+            <span className="user-name">ADMIN</span>
           </div>
-
-          <div className="row">
-            <div className="col-md-3 mb-4">
-              <div className="card text-center">
-                <div className="card-body">
-                  <h2 className="card-title">2500</h2>
-                  <p className="card-text">Welcome</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 mb-4">
-              <div className="card text-center">
-                <div className="card-body">
-                  <h2 className="card-title">123.50</h2>
-                  <p className="card-text">Average Time</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 mb-4">
-              <div className="card text-center">
-                <div className="card-body">
-                  <h2 className="card-title">1,805</h2>
-                  <p className="card-text">Collections</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 mb-4">
-              <div className="card text-center">
-                <div className="card-body">
-                  <h2 className="card-title">54</h2>
-                  <p className="card-text">Comments</p>
-                </div>
-              </div>
-            </div>
+        </header>
+        <div className="clients-section">
+          <div className="clients-header">
+            <h1>Clients</h1>
           </div>
-
-          <div className="row">
-            <div className="col-md-3 mb-4">
-              <div className="card text-center bg-primary text-white">
-                <div className="card-body">
-                  <h3 className="card-title">35k Friends</h3>
-                  <p className="card-text">128 Feeds</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 mb-4">
-              <div className="card text-center bg-info text-white">
-                <div className="card-body">
-                  <h3 className="card-title">584k Followers</h3>
-                  <p className="card-text">978 Tweets</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 mb-4">
-              <div className="card text-center bg-success text-white">
-                <div className="card-body">
-                  <h3 className="card-title">758+ Contacts</h3>
-                  <p className="card-text">365 Feeds</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 mb-4">
-              <div className="card text-center bg-danger text-white">
-                <div className="card-body">
-                  <h3 className="card-title">450 Followers</h3>
-                  <p className="card-text">57 Circles</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="chart-section py-4">
-            <h2>Extra Area Chart</h2>
-            <img src="chart-image-url" alt="Chart" className="img-fluid" />
-          </div>
-        </main>
-      </div>
+          
+          <table className="clients-table">
+            <thead>
+              <tr>
+                <th>Client Name</th>
+                <th>USER ID</th>
+                <th>CORRECT POSTURE</th>
+                <th>Invested</th>
+                <th>Valuation</th>
+                <th>Policy Type</th>
+                <th>View</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ralph Edwards</td>
+                <td>541829367FI</td>
+                <td>USD</td>
+                <td>184,540.00</td>
+                <td>250,518.70</td>
+                <td>Regular Savings, Insurance</td>
+                <td><button>View</button></td>
+              </tr>
+              {/* Add other rows similarly */}
+            </tbody>
+          </table>
+        </div>
+      </main>
     </div>
   );
 };
