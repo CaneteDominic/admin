@@ -1,10 +1,15 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AdminDashboard.css';
+import {getUserInfoAndStats} from '../api/api';
+import UserDetailsModal from './userDetailsModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './AdminDashboard.css';
 
 const AdminDashboard = ({ onLogout }) => {
   const navigate = useNavigate();
+
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [userStats, setUserStats] = useState([]);
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
@@ -12,6 +17,23 @@ const AdminDashboard = ({ onLogout }) => {
     navigate('/login');
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUserInfoAndStats();
+      setUserStats(data);
+    };
+
+    fetchData();
+  }, []);
+
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedUser(null);
+  };
+  
   return (
     <div className="admin-dashboard">
       <aside className="sidebar">
@@ -39,29 +61,31 @@ const AdminDashboard = ({ onLogout }) => {
           <table className="clients-table">
             <thead>
               <tr>
-                <th>Client Name</th>
+                <th>User Name</th>
                 <th>USER ID</th>
-                <th>CORRECT POSTURE</th>
-                <th>Invested</th>
-                <th>Valuation</th>
-                <th>Policy Type</th>
+                <th>Birthdate</th>
+                <th>Total Pushups</th>
+                <th>Total Squats</th>
                 <th>View</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Ralph Edwards</td>
-                <td>541829367FI</td>
-                <td>USD</td>
-                <td>184,540.00</td>
-                <td>250,518.70</td>
-                <td>Regular Savings, Insurance</td>
-                <td><button>View</button></td>
+            {userStats.map(user => (
+              <tr key={user.userId}>
+                <td>{user.username}</td>
+                <td>{user.userId}</td>
+                <td>{user.birthdate}</td>
+                <td>{user.totalPushUps}</td>
+                <td>{user.totalSquats}</td>
+                <td>
+                  <button onClick={() => handleUserClick(user)}>View Details</button>
+                </td>
               </tr>
-              {/* Add other rows similarly */}
+            ))}
             </tbody>
           </table>
         </div>
+        <UserDetailsModal user={selectedUser} onClose={handleCloseModal} />
       </main>
     </div>
   );
