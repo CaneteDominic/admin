@@ -88,12 +88,12 @@ function UserDetailsModal({ user, onClose }) {
             </div>
         </div>
         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}> 
-            <div style={{ marginBottom: '20px', width: '350px', height: '400px' }}>
+            <div style={{ marginBottom: '20px', width: '350px', height: 'auto' }}>
                 <h4>Push-Ups Over Time</h4>
                 <Line data={pushUpData} options={options} />
             </div>
 
-            <div style={{width: '350px', height: '400px'}}>
+            <div style={{width: '350px', height: 'auto'}}>
                 <h4>Squats Over Time</h4>
                 <Line data={squatData} options={options} />
             </div>
