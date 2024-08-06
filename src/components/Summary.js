@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, Title, Tooltip, Legend, PointElement } from 'chart.js';
 import { fetchSummary } from '../api/api'; 
+import './AdminDashboard.css';
 
 ChartJS.register(
   LineElement,
@@ -77,7 +78,7 @@ const Summary = () => {
 
   return (
     <div>
-      <h1>Summary</h1>
+      <h1>Data Summary</h1>
       <div className="summary-container">
         <div className="summary-item">
           <div><strong>User Count</strong> </div>

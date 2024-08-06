@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {getUserInfoAndStats} from '../api/api';
 import UserDetailsModal from './userDetailsModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../Assets/moon.png';
 import './AdminDashboard.css';
 import Summary from './Summary';
 
@@ -35,13 +36,12 @@ const AdminDashboard = ({ onLogout }) => {
     setSelectedUser(null);
   };
 
+
   return (
     <div className="admin-dashboard">
       <aside className="sidebar">
         <div className="sidebar-menu">
-          <div className="menu-item">Dashboard</div>
-          <div className="menu-item">Advisors</div>
-          <div className="menu-item">Clients</div>
+          <div className="menu-item">Welcome Admin!</div>
         </div>
         <button className="logout-button" onClick={handleLogout}>
           Logout
@@ -51,13 +51,12 @@ const AdminDashboard = ({ onLogout }) => {
       <main className="main-content">
         <header className="header">
           <div className="user-info">
-            <span className="user-name">ADMIN</span>
           </div>
         </header>
         <div className="clients-section">
           <Summary />
           <div className="clients-header">
-            <h1>Clients</h1>
+            <h1>USER</h1>
           </div>
           
           <table className="clients-table">
@@ -72,7 +71,7 @@ const AdminDashboard = ({ onLogout }) => {
               </tr>
             </thead>
             <tbody>
-            {userStats.map(user => (
+            {userStats.slice(0, 10).map(user => (
               <tr key={user.userId}>
                 <td>{user.username}</td>
                 <td>{user.userId}</td>

@@ -11,10 +11,10 @@ const Login = ({ onLogin }) => {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, username, password)
       .then((userCredential) => {
-        onLogin(); // Successful login
+        onLogin();
       })
       .catch((error) => {
-        setError('Invalid username or password');
+        setError('Invalid Credentials');
       });
   };
 
@@ -22,8 +22,7 @@ const Login = ({ onLogin }) => {
     <div className="login-container">
       <div className='content'>
         <h1 className="title">Smart<span>Posture</span></h1>
-        <p className="subtitle">POSTURE CORRECTOR</p>
-        <p className="description">Smart Gym Posture Correcttor App.</p>
+        <p className="subtitle">Posture Corrector Application</p>
         <div className="input-container">
           <input 
             className="login-input"
