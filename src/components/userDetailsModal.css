@@ -12,11 +12,14 @@
   
   .modal-content {
     background-color: #fefefe;
+    padding-left: 50px;
+    padding-right: 50px;
     margin: 5% auto; 
-    padding: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
     border: 1px solid #888;
     width: 60%; 
-    max-width: 800px;
+    max-width: 1000px;
     border-radius: 8px; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
     position: relative; 

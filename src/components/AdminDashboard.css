@@ -161,11 +161,12 @@
 .detail-item {
   border: 1px solid #ddd; 
   border-radius: 8px;     
-  padding: 16px;          
-  background-color: #f9f9f9; 
+  padding: 16px;   
+  color:white;       
+  background-color: #1d1d1d; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   flex: 1;                
-  min-width: 300px;     
+  min-width: 400px;     
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -197,7 +198,7 @@
 
 .view-toggle-input {
   margin-right: 8px;
-  accent-color: #007bff; /* Customize the color */
+  accent-color: #007bff; 
 }
 
 .view-toggle-input:checked + label {
