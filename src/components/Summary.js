@@ -28,12 +28,20 @@ const Summary = () => {
 
   if (!summary) return <div>Loading...</div>;
 
+  const formatDate = (dateString) => {
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const day = dateString.substring(6, 8);
+    return `${month}/${day}`;
+  };
+
   const dates = Object.keys(summary.pushUpsByDate).sort();
+  const formattedDates = dates.map(date => formatDate(date));
   const pushUps = dates.map(date => summary.pushUpsByDate[date] || 0);
   const squats = dates.map(date => summary.squatsByDate[date] || 0);
 
   const pushUpData = {
-    labels: dates,
+    labels: formattedDates,
     datasets: [
       {
         label: 'Push-Ups',
@@ -47,7 +55,7 @@ const Summary = () => {
   };
 
   const squatData = {
-    labels: dates,
+    labels: formattedDates,
     datasets: [
       {
         label: 'Squats',

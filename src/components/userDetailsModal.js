@@ -16,12 +16,20 @@ ChartJS.register(
 function UserDetailsModal({ user, onClose }) {
   if (!user || !user.stats) return null;
 
+  const formatDate = (dateString) => {
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const day = dateString.substring(6, 8);
+    return `${month}/${day}`;
+  };
+
   const dates = Object.keys(user.stats).sort();
+  const formattedDates = dates.map(date => formatDate(date));
   const pushUps = dates.map(date => user.stats[date].pushup || 0);
   const squats = dates.map(date => user.stats[date].squat || 0);
 
   const pushUpData = {
-    labels: dates,
+    labels: formattedDates,
     datasets: [
       {
         label: 'Push-Ups',
@@ -35,7 +43,7 @@ function UserDetailsModal({ user, onClose }) {
   };
 
   const squatData = {
-    labels: dates,
+    labels: formattedDates,
     datasets: [
       {
         label: 'Squats',
