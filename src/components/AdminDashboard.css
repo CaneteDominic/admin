@@ -181,5 +181,27 @@
   text-decoration: underline; 
 }
 
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.view-toggle-label {
+  margin-right: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.view-toggle-input {
+  margin-right: 8px;
+  accent-color: #007bff; /* Customize the color */
+}
+
+.view-toggle-input:checked + label {
+  font-weight: bold;
+}
 
 

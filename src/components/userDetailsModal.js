@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, Title, Tooltip, Legend, PointElement } from 'chart.js';
 import './userDetailsModal.css';
@@ -14,6 +14,8 @@ ChartJS.register(
 );
 
 function UserDetailsModal({ user, onClose }) {
+  const [view, setView] = useState('daily'); 
+
   if (!user || !user.stats) return null;
 
   const formatDate = (dateString) => {
@@ -23,10 +25,30 @@ function UserDetailsModal({ user, onClose }) {
     return `${month}/${day}`;
   };
 
+  const aggregateMonthlyData = (data) => {
+    const monthlyData = {};
+    Object.keys(data).forEach((date) => {
+      const month = date.substring(0, 6); 
+      if (!monthlyData[month]) {
+        monthlyData[month] = { pushup: 0, squat: 0 };
+      }
+      monthlyData[month].pushup += data[date].pushup || 0;
+      monthlyData[month].squat += data[date].squat || 0;
+    });
+    return monthlyData;
+  };
+
+  const formatMonthlyDate = (dateString) => {
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    return `${month}/01`;
+  };
+
   const dates = Object.keys(user.stats).sort();
-  const formattedDates = dates.map(date => formatDate(date));
-  const pushUps = dates.map(date => user.stats[date].pushup || 0);
-  const squats = dates.map(date => user.stats[date].squat || 0);
+  const formattedDates = view === 'daily' ? dates.map(date => formatDate(date)) : Object.keys(aggregateMonthlyData(user.stats)).sort().map(date => formatMonthlyDate(date));
+
+  const pushUps = view === 'daily' ? dates.map(date => user.stats[date].pushup || 0) : Object.values(aggregateMonthlyData(user.stats)).map(month => month.pushup || 0);
+  const squats = view === 'daily' ? dates.map(date => user.stats[date].squat || 0) : Object.values(aggregateMonthlyData(user.stats)).map(month => month.squat || 0);
 
   const pushUpData = {
     labels: formattedDates,
@@ -78,37 +100,45 @@ function UserDetailsModal({ user, onClose }) {
         <span className="close" onClick={onClose}>&times;</span>
         <h2>User Details</h2>
         <div className="user-details">
-            <div className="detail-item">
-                <div><strong>Username</strong></div> 
-                <div>{user.username}</div>
-            </div>
-            <div className="detail-item">
-                <div><strong>User ID</strong></div> 
-                <div>{user.userId}</div>
-            </div>
-            <div className="detail-item">
-                <div><strong>Total Push-Ups</strong></div> 
-                <div>{user.totalPushUps}</div>
-            </div>
-            <div className="detail-item">
-                <div><strong>Total Squats</strong></div> 
-                <div>{user.totalSquats}</div>
-            </div>
+          <div className="detail-item">
+            <div><strong>Username</strong></div> 
+            <div>{user.username}</div>
+          </div>
+          <div className="detail-item">
+            <div><strong>User ID</strong></div> 
+            <div>{user.userId}</div>
+          </div>
+          <div className="detail-item">
+            <div><strong>Total Push-Ups</strong></div> 
+            <div>{user.totalPushUps}</div>
+          </div>
+          <div className="detail-item">
+            <div><strong>Total Squats</strong></div> 
+            <div>{user.totalSquats}</div>
+          </div>
         </div>
-        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}> 
-            <div style={{ marginBottom: '20px', width: '350px', height: 'auto' }}>
-                <h4>Push-Ups Over Time</h4>
-                <Line data={pushUpData} options={options} />
-            </div>
-
-            <div style={{width: '350px', height: 'auto'}}>
-                <h4>Squats Over Time</h4>
-                <Line data={squatData} options={options} />
-            </div>
+        <div className="view-toggle">
+          <label style={{marginRight: '20px'}}>
+            <input type="radio" value="daily" checked={view === 'daily'} onChange={() => setView('daily')} />
+            Daily
+          </label>
+          <label>
+            <input type="radio" value="monthly" checked={view === 'monthly'} onChange={() => setView('monthly')} />
+            Monthly
+          </label>
         </div>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}> 
+          <div style={{ marginBottom: '20px', width: '350px', height: 'auto' }}>
+            <h4>Push-Ups Over Time</h4>
+            <Line data={pushUpData} options={options} />
+          </div>
+          <div style={{ width: '350px', height: 'auto' }}>
+            <h4>Squats Over Time</h4>
+            <Line data={squatData} options={options} />
+          </div>
         </div>
       </div>
-    
+    </div>
   );
 }
 

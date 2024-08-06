@@ -16,6 +16,7 @@ ChartJS.register(
 
 const Summary = () => {
   const [summary, setSummary] = useState(null);
+  const [view, setView] = useState('daily');
 
   useEffect(() => {
     const getSummary = async () => {
@@ -35,10 +36,29 @@ const Summary = () => {
     return `${month}/${day}`;
   };
 
+  const aggregateMonthlyData = (data) => {
+    const monthlyData = {};
+    Object.keys(data).forEach((date) => {
+      const month = date.substring(0, 6);
+      if (!monthlyData[month]) {
+        monthlyData[month] = 0;
+      }
+      monthlyData[month] += data[date] || 0;
+    });
+    return monthlyData;
+  };
+
+  const formatMonthlyDate = (dateString) => {
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    return `${month}/01`;
+  };
+
   const dates = Object.keys(summary.pushUpsByDate).sort();
-  const formattedDates = dates.map(date => formatDate(date));
-  const pushUps = dates.map(date => summary.pushUpsByDate[date] || 0);
-  const squats = dates.map(date => summary.squatsByDate[date] || 0);
+  const formattedDates = view === 'daily' ? dates.map(date => formatDate(date)) : Object.keys(aggregateMonthlyData(summary.pushUpsByDate)).sort().map(date => formatMonthlyDate(date));
+
+  const pushUps = view === 'daily' ? dates.map(date => summary.pushUpsByDate[date] || 0) : Object.values(aggregateMonthlyData(summary.pushUpsByDate)).map(month => month || 0);
+  const squats = view === 'daily' ? dates.map(date => summary.squatsByDate[date] || 0) : Object.values(aggregateMonthlyData(summary.squatsByDate)).map(month => month || 0);
 
   const pushUpData = {
     labels: formattedDates,
@@ -100,6 +120,17 @@ const Summary = () => {
           <div><strong>Total Squats:</strong></div> 
           <div>{summary.totalSquats}</div>
         </div>
+      </div>
+
+      <div className="view-toggle">
+        <label style={{marginRight: '20px'}}>
+          <input type="radio" value="daily" checked={view === 'daily'} onChange={() => setView('daily')} />
+          Daily
+        </label>
+        <label>
+          <input type="radio" value="monthly" checked={view === 'monthly'} onChange={() => setView('monthly')} />
+          Monthly
+        </label>
       </div>
 
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}> 
