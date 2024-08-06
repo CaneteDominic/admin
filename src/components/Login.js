@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';
 import './Login.css';
@@ -7,11 +8,13 @@ const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, username, password)
       .then((userCredential) => {
         onLogin();
+        navigate('/admin/summary');
       })
       .catch((error) => {
         setError('Invalid Credentials');
